@@ -1,4 +1,6 @@
 import 'package:aplikasi01/img.dart';
+import 'dart:async';
+import 'package:aplikasi01/login.dart';
 import 'package:aplikasi01/pemesanan.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi01/backup.dart';
@@ -59,7 +61,7 @@ class _MyBottomNavbar extends State<MyBottomNavbar> {
       case 3:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MyCarousel()),
+          MaterialPageRoute(builder: (context) => login()),
         );
         break;
     }
@@ -310,10 +312,42 @@ class _MyBottomNavbar extends State<MyBottomNavbar> {
                 ],
               )),
               SizedBox(height: 20),
+              // Figma Flutter Generator Group1Widget - GROUP
               Container(
-                height: 100,
-                color: Colors.yellow,
-              ),
+                  width: 320,
+                  height: 276,
+                  child: Stack(children: <Widget>[
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        child: Text(
+                          'Lokasi',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontFamily: 'Inter',
+                              fontSize: 26,
+                              letterSpacing:
+                                  0 /*percentages not used in flutter. defaulting to zero*/,
+                              fontWeight: FontWeight.normal,
+                              height: 1),
+                        )),
+                    Positioned(
+                        top: 51,
+                        left: 0,
+                        child: Container(
+                            width: 320,
+                            height: 225,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                              color: Color.fromRGBO(217, 217, 217, 1),
+                            ))),
+                  ])),
               SizedBox(height: 20),
               Container(
                 height: 100,

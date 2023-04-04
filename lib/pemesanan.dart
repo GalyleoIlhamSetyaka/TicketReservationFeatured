@@ -47,7 +47,7 @@ class _FormPageState extends State<FormPage> {
             IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.push(context,
+                Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => MyBottomNavbar()));
               },
             ),

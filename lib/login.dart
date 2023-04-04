@@ -5,18 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:aplikasi01/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:aplikasi01/login.dart';
 
-class MyWebView extends StatefulWidget {
-  final String url;
+import 'backup.dart';
 
-  const MyWebView({Key? key, required this.url}) : super(key: key);
-
+class login extends StatefulWidget {
   @override
-  _MyWebViewState createState() => _MyWebViewState();
+  _login createState() => _login();
 }
 
-class _MyWebViewState extends State<MyWebView> {
+class _login extends State<login> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
@@ -55,13 +52,48 @@ class _MyWebViewState extends State<MyWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebView(
-        initialUrl:
-            'https://app.lapentor.com/sphere/kalilo', // Memuat url dari paramerter widget
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
+      body: Center(
+        child: Container(
+          width: 270,
+          height: 300,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.account_circle, size: 50),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Username',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
