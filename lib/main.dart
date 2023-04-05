@@ -22,7 +22,7 @@ class _MyBottomNavbar extends State<MyBottomNavbar> {
   int _selectedIndex = 0;
 
   int _current = 0;
-  List<String> _images = [
+  final List<String> _images = [
     'assets/image/asxxx.jpg',
     'assets/image/bg.jpg',
     'assets/image/kalilo2.jpeg',
@@ -71,37 +71,261 @@ class _MyBottomNavbar extends State<MyBottomNavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          color: Color.fromRGBO(54, 181, 54, 100),
           child: ListView(
-            children: [
-              SizedBox(
-                height: 50,
-                child: Container(
-                  child: const Text(
-                    'APLIKASI PEMESANAN TIKET HUTAN PINUSAN KALILO',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                        fontFamily: 'Helvetica',
-                        fontSize: 20,
-                        letterSpacing:
-                            0 /*percentages not used in flutter. defaulting to zero*/,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
+        children: [
+          Container(
+            width: 364,
+            height: 234,
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                image: AssetImage('assets/image/background.jpg'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      width: 364,
+                      height: 234,
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Selamat Datang di Aplikasi Kalilo,',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Mudahkan pemesanan tiket melalui aplikasi',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                const SizedBox(height: 20),
+                Positioned(
+                  top: 184,
+                  left: 23,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PemesananWidget()));
+                    },
+                    child: Text('Pesan Sekarang'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(70, 30),
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 13),
+                      textStyle: TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            child: Card(
+              elevation: 5.0,
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'GALLERI',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontFamily: 'Helvetica',
+                            fontSize: 20,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.normal,
+                            height: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        CarouselSlider(
+                          items: _images.map((image) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      topRight: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5),
+                                      bottomRight: Radius.circular(5),
+                                    ),
+                                    image: DecorationImage(
+                                      image: AssetImage(image),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }).toList(),
+                          options: CarouselOptions(
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            aspectRatio: 16 / 9,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _current = index;
+                              });
+                            },
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _images.map((image) {
+                            int index = _images.indexOf(image);
+                            return Container(
+                              width: 8.0,
+                              height: 8.0,
+                              margin: const EdgeInsets.symmetric(
+                                vertical: 10.0,
+                                horizontal: 2.0,
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _current == index
+                                    ? Colors.white
+                                    : Colors.grey,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                width: 364,
-                height: 234,
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Container(
-                        width: 364,
-                        height: 234,
+            ),
+          ),
+          SizedBox(height: 20),
+          SizedBox(
+            height: 30,
+            child: Container(
+              child: const Text(
+                'PAKET PENGUNJUNG',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                    fontFamily: 'Helvetica',
+                    fontSize: 20,
+                    letterSpacing:
+                        0 /*percentages not used in flutter. defaulting to zero*/,
+                    fontWeight: FontWeight.normal,
+                    height: 1),
+              ),
+            ),
+          ),
+          Container(
+              child: Column(
+            children: [
+              CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 16 / 9,
+                  enlargeCenterPage: true,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  },
+                ),
+                items: _packages.map((package) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(package),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _packages.map((package) {
+                  int index = _packages.indexOf(package);
+                  return Container(
+                    width: 16.0,
+                    height: 16.0,
+                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _current == index ? Colors.blue : Colors.grey,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          )),
+          SizedBox(height: 20),
+          Container(
+              width: 320,
+              height: 276,
+              child: Stack(children: <Widget>[
+                const Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Text(
+                      'Lokasi',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 1),
+                          fontFamily: 'Inter',
+                          fontSize: 26,
+                          letterSpacing:
+                              0 /*percentages not used in flutter. defaulting to zero*/,
+                          fontWeight: FontWeight.normal,
+                          height: 1),
+                    )),
+                Positioned(
+                    top: 51,
+                    left: 0,
+                    child: Container(
+                        width: 320,
+                        height: 225,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
@@ -109,252 +333,15 @@ class _MyBottomNavbar extends State<MyBottomNavbar> {
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10),
                           ),
-                          color: Color.fromRGBO(217, 217, 217, 100),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 30,
-                      left: 236,
-                      child: Container(
-                        width: 111,
-                        height: 87,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/bg.png'),
+                            fit: BoxFit.cover,
                           ),
-                          color: Color.fromRGBO(238, 115, 115, 1),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Container(
-                      width: 230,
-                      height: 180,
-                      padding: EdgeInsets.all(10),
-                      child: const Center(
-                        child: Text(
-                          'Hutan Pinus Kalilo merupakan objek wisata bertemakan alam yang berada di Desa Tlogoguwo, Kecamatan Kaligesing, Kabupaten Purworejo, Jawa Tengah. Objek wisata ini buka mulai dari jam 8:00-5:00',
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 184,
-                      left: 23,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PemesananWidget()));
-                        },
-                        child: Text('Pesan Sekarang'),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(111, 40),
-                          backgroundColor: Colors.blue,
-                          padding: EdgeInsets.symmetric(horizontal: 13),
-                          textStyle: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 30,
-                child: Container(
-                  child: const Text(
-                    'GALLERI',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                        fontFamily: 'Helvetica',
-                        fontSize: 20,
-                        letterSpacing:
-                            0 /*percentages not used in flutter. defaulting to zero*/,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
-                  ),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    CarouselSlider(
-                      items: _images.map((image) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                                ),
-                                image: DecorationImage(
-                                  image: AssetImage(image),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        aspectRatio: 16 / 9,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _current = index;
-                          });
-                        },
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: _images.map((image) {
-                        int index = _images.indexOf(image);
-                        return Container(
-                          width: 8.0,
-                          height: 8.0,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 2.0),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color:
-                                _current == index ? Colors.white : Colors.grey,
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 30,
-                child: Container(
-                  child: const Text(
-                    'PAKET PENGUNJUNG',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 1),
-                        fontFamily: 'Helvetica',
-                        fontSize: 20,
-                        letterSpacing:
-                            0 /*percentages not used in flutter. defaulting to zero*/,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
-                  ),
-                ),
-              ),
-              Container(
-                  child: Column(
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      enlargeCenterPage: true,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      },
-                    ),
-                    items: _packages.map((package) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(package),
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _packages.map((package) {
-                      int index = _packages.indexOf(package);
-                      return Container(
-                        width: 16.0,
-                        height: 16.0,
-                        margin: EdgeInsets.symmetric(horizontal: 2.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _current == index ? Colors.blue : Colors.grey,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              )),
-              SizedBox(height: 20),
-              // Figma Flutter Generator Group1Widget - GROUP
-              Container(
-                  width: 320,
-                  height: 276,
-                  child: Stack(children: <Widget>[
-                    Positioned(
-                        top: 0,
-                        left: 0,
-                        child: Text(
-                          'Lokasi',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              fontFamily: 'Inter',
-                              fontSize: 26,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.normal,
-                              height: 1),
-                        )),
-                    Positioned(
-                        top: 51,
-                        left: 0,
-                        child: Container(
-                            width: 320,
-                            height: 225,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                              ),
-                              color: Color.fromRGBO(217, 217, 217, 1),
-                            ))),
-                  ])),
-              SizedBox(height: 20),
-              Container(
-                height: 100,
-                color: Colors.orange,
-              ),
-            ],
-          )),
+                          color: Color.fromRGBO(217, 217, 217, 1),
+                        ))),
+              ])),
+        ],
+      )),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(

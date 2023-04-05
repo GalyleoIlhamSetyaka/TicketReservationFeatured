@@ -68,6 +68,7 @@ flutter:
     - assets/PP/HPK-1.png
     - assets/PP/HPK-2.png
     - assets/PP/HPK-3.png
+    - assets/image/background.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
