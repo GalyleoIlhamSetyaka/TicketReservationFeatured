@@ -78,27 +78,15 @@ class _FormPageState extends State<FormPage> {
             SizedBox(height: 16.0),
             TextField(
               decoration: InputDecoration(
-                labelText: 'City',
+                labelText: 'Jenis Paket',
               ),
             ),
             SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Submit'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MyBottomNavbar()));
-                  },
-                  child: Text('Back'),
-                ),
-              ],
+            Center(
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('Submit'),
+              ),
             ),
           ],
         ),
