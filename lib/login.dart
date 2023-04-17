@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:aplikasi01/img.dart';
-import 'package:aplikasi01/pemesanan.dart';
+import 'package:ReservasiKalilo/img.dart';
+import 'package:ReservasiKalilo/pemesanan.dart';
 import 'package:flutter/material.dart';
-import 'package:aplikasi01/main.dart';
+import 'package:ReservasiKalilo/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -17,109 +17,64 @@ class _login extends State<login> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => MyBottomNavbar()),
-        );
-        break;
-      case 1:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => PemesananWidget()),
-        );
-        break;
-      case 2:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  MyWebView(url: 'https://app.lapentor.com/sphere/kalilo')),
-        );
-        break;
-      case 3:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => login()),
-        );
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: 270,
-          height: 300,
+      body: Container(
           decoration: BoxDecoration(
-            color: Colors.green,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(100, 181, 246, 1),
+                Color.fromRGBO(43, 90, 219, 1),
+              ],
+            ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(Icons.account_circle, size: 50),
-              SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Username',
-                  border: OutlineInputBorder(),
+          child: Center(
+            child: Card(
+              color: Color.fromRGBO(216, 216, 216, 1),
+              elevation: 8,
+              margin: const EdgeInsets.all(20),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.account_circle_rounded,
+                      size: 50,
+                      color: Colors.black,
+                    ),
+                    Text('LOGIN PENGELOLA',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                      ),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Login'),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 10),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Login'),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book_online),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.threesixty),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.black,
-        iconSize: 25.0,
-      ),
+            ),
+          )),
     );
   }
 }
